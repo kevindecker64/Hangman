@@ -54,6 +54,16 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+playAgainBtn.addEventListener("click", () => {
+  playable = true;
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+  displayWord();
+  updateWrongLettersEl();
+  popup.style.display = "none";
+});
+
 /*-- Functions --*/
 function displayWord() {
   wordEl.innerHTML = `${selectedWord
@@ -74,9 +84,20 @@ function displayWord() {
   }
 }
 
+function updateWrongLettersEl() {
+  wrongLettersEl.innerHTML = `
+  ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
+  ${wrongLetters.map((letter) => `<span> ${letter}</span>`)}
+  `;
+}
+
 function showNotification() {
-  notification.classList.add("show");
+  // notification.classList.add("show");
+  notification.style.display = "flex";
   setTimeout(() => {
-    notification.classList.remove("show");
+    // notification.classList.remove("show");
+    notification.style.display = "none";
   }, 2000);
 }
+
+displayWord();
