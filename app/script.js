@@ -78,6 +78,7 @@ function displayWord() {
         }</span>`
     )
     .join("")}`;
+
   const innerWord = wordEl.innerText.replace(/[ \n]/g, "");
   if (innerWord === selectedWord) {
     finalMessage.innerText = "Congrats! You Win!";
@@ -97,8 +98,13 @@ function updateWrongLettersEl() {
       part.style.display = "block";
     }
   }
-
   
+  if (wrongLetters.length === figureParts.length) {
+    finalMessage.innerText = "You lost...";
+    finalMessageRevealWord.innerText = `The word was: ${selectedWord}`;
+    popup.style.display = "flex";
+    playable = false;
+  }
 }
 
 function showNotification() {
