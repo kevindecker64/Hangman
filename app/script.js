@@ -28,7 +28,7 @@ const finalMessageRevealWord = document.getElementById(
   "final-message-reveal-word"
 );
 
-const figureParts = document.getElementById("figure-parts");
+const figureParts = document.getElementsByClassName("figure-part");
 
 /*-- Event Listeners --*/
 window.addEventListener("keydown", (e) => {
@@ -61,6 +61,9 @@ playAgainBtn.addEventListener("click", () => {
   selectedWord = words[Math.floor(Math.random() * words.length)];
   displayWord();
   updateWrongLettersEl();
+  for (let part of figureParts) {
+    part.style.display = "none";
+  }
   popup.style.display = "none";
 });
 
@@ -70,9 +73,9 @@ function displayWord() {
     .split("")
     .map(
       (letter) =>
-        `<span class="letter">
-      ${correctLetters.includes(letter) ? letter : ""}
-    </span>`
+        `<span class="letter">${
+          correctLetters.includes(letter) ? letter : ""
+        }</span>`
     )
     .join("")}`;
   const innerWord = wordEl.innerText.replace(/[ \n]/g, "");
@@ -87,15 +90,20 @@ function displayWord() {
 function updateWrongLettersEl() {
   wrongLettersEl.innerHTML = `
   ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
-  ${wrongLetters.map((letter) => `<span> ${letter}</span>`)}
-  `;
+  ${wrongLetters.map((letter) => `<span> ${letter}</span>`)}`;
+
+  for (let part of figureParts) {
+    if (part.id <= wrongLetters.length) {
+      part.style.display = "block";
+    }
+  }
+
+  
 }
 
 function showNotification() {
-  // notification.classList.add("show");
   notification.style.display = "flex";
   setTimeout(() => {
-    // notification.classList.remove("show");
     notification.style.display = "none";
   }, 2000);
 }
