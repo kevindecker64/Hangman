@@ -12,7 +12,7 @@ HTML, CSS, JavaScript
 
 ## Play Here
 
-[Click Here to Play Now](https://kevindecker64.github.io/Hangman/)
+[Click Here to Play Now](https://kevindecker64.github.io/hangman/)
 
 ---
 
